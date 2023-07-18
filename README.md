@@ -21,11 +21,11 @@ Install with your favorite plugin manager
 - Packer
 
 ```lua
-use "zSnails/night-city.nvim"
+use "zSnails/cityscape.nvim"
 ```
 
 - VimPlug
 
 ```vim
-Plug 'zSnails/night-city.nvim'
+Plug 'zSnails/cityscape.nvim'
 ```
