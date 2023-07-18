@@ -148,7 +148,7 @@ if vim.g.colors_name then
     vim.cmd("hi clear")
 end
 
-vim.g.colors_name = "night-city"
+vim.g.colors_name = "cityscape"
 vim.o.termguicolors = true
 
 --- first define the basic highlight groups
