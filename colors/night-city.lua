@@ -124,10 +124,11 @@ local groups = {
     VertSplit = { link = "Normal" },
 
     --- XXX: Masm section
-    masmDirective = { fg = colors.Rose },
+    masmDirective = { fg = colors.Orange, bold = true },
     masmText = { fg = colors.GrassGreen },
     masmOption = { fg = colors.VividSkyBlue },
     masmOpcode = { fg = colors.PaleAzure, bold = true },
+    masmLabel = { fg = colors.GrassGreen, bold = true },
 }
 
 local function hi(group, options)
