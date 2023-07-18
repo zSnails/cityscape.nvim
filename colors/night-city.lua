@@ -1,4 +1,3 @@
---- @type table
 local colors = {
     Maize = "#efef06",
     CursorLineBG = "#02204a",
@@ -61,8 +60,9 @@ local groups = {
     -- semen de perro me cago en todo
     CursorLine = { bg = colors.CursorLineBG },
     Folded = { bg = colors.CursorLineBG, fg = colors.ForegroundAlt },
-    FoldColumn = { bg = colors.CursorLineBG, fg = colors.ForegroundAlt },
-    StatusLine = { fg = colors.ForegroundAlt },
+    FoldColumn = { bg = colors.CursorLineBG, fg = colors.Foreground },
+    StatusLine = { fg = colors.Foreground, bg = colors.CursorLineBG },
+    StatusLineNC = { fg = colors.ForegroundAlt },
     CmpItemAbbr = { fg = colors.Foreground },
     CmpItemAbbrDeprecated = { strikethrough = true, fg = colors.ForegroundAlt },
     CmpItemAbbrMatch = { fg = colors.Maize },
@@ -122,6 +122,12 @@ local groups = {
     BufferVisible = { link = "BufferDefaultInactive" },
     BufferInactiveSign = { bg = colors.OxfordBlue, fg = colors.VividSkyBlue },
     VertSplit = { link = "Normal" },
+
+    --- XXX: Masm section
+    masmDirective = { fg = colors.Rose },
+    masmText = { fg = colors.GrassGreen },
+    masmOption = { fg = colors.VividSkyBlue },
+    masmOpcode = { fg = colors.PaleAzure, bold = true },
 }
 
 local function hi(group, options)
