@@ -1,3 +1,8 @@
+if not vim.fn.has("nvim-0.8") then
+    vim.api.nvim_err_writeln("cityscape: this colorscheme requires nvim-0.8+")
+    return
+end
+
 local colors = {
     Maize = "#efef06",
     CursorLineBG = "#02204a",
@@ -16,7 +21,7 @@ local colors = {
     LinkYellow = "#fff700"
 }
 
-local groups = {
+local defaultGroups = {
     Visual = { bg = colors.ForegroundAlt, fg = colors.OxfordBlue },
     VisualNOS = { link = "Visual" },
     DiagnosticError = { link = "Error" },
@@ -59,35 +64,6 @@ local groups = {
     FoldColumn = { bg = colors.CursorLineBG, fg = colors.Foreground },
     StatusLine = { fg = colors.Foreground, bg = colors.CursorLineBG },
     StatusLineNC = { fg = colors.ForegroundAlt },
-    CmpItemAbbr = { fg = colors.Foreground },
-    CmpItemMenu = { link = "Comment" },
-    CmpItemAbbrDeprecated = { strikethrough = true, fg = colors.ForegroundAlt },
-    CmpItemAbbrMatch = { fg = colors.Maize },
-    CmpItemKind = { fg = colors.Rose },
-    CmpItemKindText = { fg = colors.Foreground },
-    CmpItemKindMethod = { fg = colors.Orange },
-    CmpItemKindFunction = { fg = colors.Razzmatazz },
-    CmpItemKindConstructor = { link = "Type" },
-    CmpItemKindField = { fg = colors.Orange },
-    CmpItemKindVariable = { fg = colors.GrassGreen },
-    CmpItemKindClass = { link = "Type" },
-    CmpItemKindInterface = { link = "Type" },
-    CmpItemKindModule = { fg = colors.GrassGreen },
-    CmpItemKindProperty = { link = "CmpItemKindField" },
-    CmpItemKindUnit = { fg = colors.GrassGreen },
-    CmpItemKindValue = { fg = colors.VividSkyBlue },
-    CmpItemKindEnum = { link = "Type" },
-    CmpItemKindKeyword = { fg = colors.Razzmatazz },
-    CmpItemKindSnippet = { fg = colors.RobinEggBlue },
-    CmpItemKindColor = { fg = colors.Orange },
-    CmpItemKindFile = { fg = colors.Foreground },
-    CmpItemKindReference = { fg = colors.VividSkyBlue },
-    CmpItemKindFolder = { fg = colors.Orange },
-    CmpItemKindEnumMember = { link = "CmpItemKindEnum" },
-    CmpItemKindStruct = { link = "Type" },
-    CmpItemKindEvent = { fg = colors.LinkYellow },
-    CmpItemKindOperator = { link = "Operator" },
-    CmpItemKindTypeParameter = { link = "@lsp.type.parameter" },
     SpecialKey = { fg = colors.Razzmatazz },
     Nontext = { link = "Comment" },
     Pmenu = { bg = colors.CursorLineBG },
@@ -103,6 +79,7 @@ local groups = {
     ["@method"] = { link = "Function" },
     ["@lsp.mod.readonly"] = { fg = colors.RobinEggBlue },
     ["@lsp.mod.importDeclaration"] = { link = "@lsp.mod.readonly" },
+    ["@lsp.mod.defaultLibrary"] = { link = "Special" },
     ["@lsp.type.method"] = { link = "@method" },
     ["@lsp.type.namespace"] = { fg = colors.PaleAzure },
     ["@field"] = { fg = colors.Foreground },
@@ -154,8 +131,46 @@ local groups = {
     masmLabel = { fg = colors.GrassGreen, bold = true },
 }
 
+local cmpGroups = {
+    CmpItemAbbr = { fg = colors.Foreground },
+    CmpItemMenu = { link = "Comment" },
+    CmpItemAbbrDeprecated = { strikethrough = true, fg = colors.ForegroundAlt },
+    CmpItemAbbrMatch = { fg = colors.Maize },
+    CmpItemKind = { fg = colors.Rose },
+    CmpItemKindText = { fg = colors.Foreground },
+    CmpItemKindMethod = { fg = colors.Orange },
+    CmpItemKindFunction = { fg = colors.Razzmatazz },
+    CmpItemKindConstructor = { link = "Type" },
+    CmpItemKindField = { fg = colors.Orange },
+    CmpItemKindVariable = { fg = colors.GrassGreen },
+    CmpItemKindClass = { link = "Type" },
+    CmpItemKindInterface = { link = "Type" },
+    CmpItemKindModule = { fg = colors.GrassGreen },
+    CmpItemKindProperty = { link = "CmpItemKindField" },
+    CmpItemKindUnit = { fg = colors.GrassGreen },
+    CmpItemKindValue = { fg = colors.VividSkyBlue },
+    CmpItemKindEnum = { link = "Type" },
+    CmpItemKindKeyword = { fg = colors.Razzmatazz },
+    CmpItemKindSnippet = { fg = colors.RobinEggBlue },
+    CmpItemKindColor = { fg = colors.Orange },
+    CmpItemKindFile = { fg = colors.Foreground },
+    CmpItemKindReference = { fg = colors.VividSkyBlue },
+    CmpItemKindFolder = { fg = colors.Orange },
+    CmpItemKindEnumMember = { link = "CmpItemKindEnum" },
+    CmpItemKindStruct = { link = "Type" },
+    CmpItemKindEvent = { fg = colors.LinkYellow },
+    CmpItemKindOperator = { link = "Operator" },
+    CmpItemKindTypeParameter = { link = "@lsp.type.parameter" },
+}
+
 local function hi(group, options)
     vim.api.nvim_set_hl(0, group, options)
+end
+
+local function register(group)
+    for g, options in pairs(group) do
+        hi(g, options)
+    end
 end
 
 if vim.g.colors_name then
@@ -165,7 +180,13 @@ end
 vim.g.colors_name = "cityscape"
 vim.o.termguicolors = true
 
---- first define the basic highlight groups
-for group, options in pairs(groups) do
-    hi(group, options)
+--- Always register the default groups
+register(defaultGroups)
+
+
+--- Check if cmp is installed before loading Cmp hl groups
+local cmp, _ = pcall(require, "cmp")
+
+if cmp then
+    register(cmpGroups)
 end
