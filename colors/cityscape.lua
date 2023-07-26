@@ -22,6 +22,8 @@ local colors = {
 }
 
 local defaultGroups = {
+    debugBreakpoint = { bg = colors.Rose },
+    debugPC = { bg = colors.CursorLineBG },
     Visual = { bg = colors.ForegroundAlt, fg = colors.OxfordBlue },
     VisualNOS = { link = "Visual" },
     DiagnosticError = { link = "Error" },
