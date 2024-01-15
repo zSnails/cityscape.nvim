@@ -6,7 +6,7 @@ end
 local colors = {
     -- Yellow = "#f2e76e",
     Yellow = "#f7e736",
-    CursorLineBG = "#02204a",
+    CursorLineBG = "#1a1a1a",
     SoftGreen = "#79f26e",
     Razzmatazz = "#ff0a78",
     -- Razzmatazz = "#f070ac",
@@ -67,7 +67,7 @@ local defaultGroups = {
     Todo = { fg = colors.Razzmatazz },
     Search = { bg = colors.PaleAzure, fg = colors.Background },
     LineNr = { fg = colors.ForegroundAlt, bg = colors.BackgroundAlt, bold = true, italic = true },
-    CursorLineNr = { bold = true },
+    CursorLineNr = { link = "LineNr" },
     CursorLine = { bg = colors.CursorLineBG },
     CursorColumn = { bg = colors.CursorLineBG },
     WinBar = { bg = colors.Background },
