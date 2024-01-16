@@ -108,7 +108,7 @@ local defaultGroups = {
     ["@tag.attribute.tsx"] = { link = "Identifier" },
     ["@keyword.return"] = { fg = colors.SoftGreen, italic = true, bold = true },
     ["@lsp.typemod.variable.global"] = { fg = colors.VividSkyBlue },
-    ["@text.title"] = { fg = colors.Rose, bold = true },
+    ["@text.title"] = { fg = colors.Razzmatazz, bold = true },
     ["@tag.html"] = { link = "Special" },
     htmlTagName = { link = "@tag.html" },
     htmlTagN = { link = "Special" },
@@ -137,12 +137,35 @@ local defaultGroups = {
     BufferVisible = { link = "BufferDefaultInactive" },
     BufferInactiveSign = { bg = colors.Background, fg = colors.VividSkyBlue },
     VertSplit = { bg = colors.Background, fg = colors.BackgroundAlt },
-    WinSeparator = { bg = colors.Background, fg = colors.BackgroundAlt },
+    WinSeparator = { link = "VertSplit" },
     masmDirective = { fg = colors.Orange, bold = true },
     masmText = { fg = colors.SoftGreen },
     masmOption = { fg = colors.VividSkyBlue },
-    masmOpcode = { fg = colors.PaleAzure, bold = true },
+    masmOpcode = { fg = colors.Razzmatazz, bold = true },
+    masmRegister = { fg = colors.PaleAzure },
     masmLabel = { fg = colors.SoftGreen, bold = true },
+}
+
+local barbarGroups = {
+
+    BufferCurrent        = { bg = colors.BackgroundAlt },
+    BufferCurrentIndex   = { bg = colors.BackgroundAlt },
+    BufferCurrentMod     = { bg = colors.BackgroundAlt, fg = colors.Razzmatazz, italic = true },
+    BufferCurrentSign    = { bg = colors.BackgroundAlt, fg = colors.Razzmatazz },
+    BufferCurrentTarget  = { bg = colors.BackgroundAlt },
+
+    BufferVisible        = { bg = colors.Background },
+    BufferVisibleMod     = { bg = colors.Background },
+    BufferVisibleIndex   = { bg = colors.Background },
+    BufferVisibleSign    = { bg = colors.Background },
+    BufferVisibleTarget  = { bg = colors.Background },
+
+    BufferInactive       = { bg = colors.Background },
+    BufferInactiveIndex  = { bg = colors.Background },
+    BufferInactiveMod    = { bg = colors.Background, fg = colors.Razzmatazz, italic = true },
+    BufferInactiveSign   = { bg = colors.Background, fg = colors.BackgroundAlt },
+    BufferInactiveTarget = { bg = colors.Background }
+
 }
 
 local cmpGroups = {
@@ -196,11 +219,14 @@ vim.o.termguicolors = true
 
 --- Always register the default groups
 register(defaultGroups)
-
+register(barbarGroups)
 
 --- Check if cmp is installed before loading Cmp hl groups
-local cmp, _ = pcall(require, "cmp")
-
-if cmp then
+local ok, _ = pcall(require, "cmp")
+if ok then
     register(cmpGroups)
 end
+
+-- local ok, _ = pcall(require, "barbar.nvim")
+-- if ok then
+-- end
