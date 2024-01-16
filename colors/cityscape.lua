@@ -91,7 +91,10 @@ local defaultGroups = {
     ["@function.builtin"] = { link = "@type.builtin" },
     ["@lsp.type.method"] = { link = "@method" },
     ["@lsp.type.namespace"] = { fg = colors.PaleAzure },
-    ["@field"] = { fg = colors.Foreground },
+    ["@field"] = { fg = colors.Orange },
+    ["@field.lua"] = { fg = colors.ForegroundAlt },
+    ["@lsp.type.property.lua"] = { fg = colors.ForegroundAlt },
+    ["@character"] = { fg = colors.PaleAzure },
     ["@tag.delimiter"] = { fg = colors.Foreground },
     ["@punctuation.delimiter"] = { fg = colors.Foreground },
     ["@punctuation.bracket"] = { fg = colors.Foreground },
@@ -107,7 +110,7 @@ local defaultGroups = {
     ["@property.tsx"] = { link = "Identifier" },
     ["@tag.attribute.tsx"] = { link = "Identifier" },
     ["@keyword.return"] = { fg = colors.SoftGreen, italic = true, bold = true },
-    ["@lsp.typemod.variable.global"] = { fg = colors.VividSkyBlue },
+    ["@lsp.typemod.variable.global"] = { link = "Constant" },
     ["@text.title"] = { fg = colors.Razzmatazz, bold = true },
     ["@tag.html"] = { link = "Special" },
     htmlTagName = { link = "@tag.html" },
@@ -144,6 +147,8 @@ local defaultGroups = {
     masmOpcode = { fg = colors.Razzmatazz, bold = true },
     masmRegister = { fg = colors.PaleAzure },
     masmLabel = { fg = colors.SoftGreen, bold = true },
+    MoreMsg = { fg = colors.Orange },
+    Question = { link = "MoreMsg" }
 }
 
 local barbarGroups = {
